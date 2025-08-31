@@ -30,8 +30,7 @@ class Tree {
     if (root === null) return new Node(value);
     if (root.data === value) return root;
     if (value < root.data) root.left = this.#insert(root.left, value);
-    else if (value > root.data)
-      root.right = this.#insert(root.right, value);
+    else if (value > root.data) root.right = this.#insert(root.right, value);
     return root;
   }
   deleteItem(value) {
@@ -64,5 +63,21 @@ class Tree {
       current.data = tempVar.data;
     }
     return root;
+  }
+  find(value) {
+    const result = this.#find(this.root, value);
+    return result;
+  }
+  #find(root, value) {
+    // Private method implemented to find a node in a tree behind the scene and prevent external access
+    let current = root;
+    while (current !== null) {
+      if (current.data === value) {
+        return current;
+      }
+      if (value < current.data) current = current.left;
+      else if (value > current.data) current = current.right;
+    }
+    return null;
   }
 }
