@@ -84,4 +84,17 @@ class Tree {
     }
     return null;
   }
+  levelOrderForEach(callBack) {
+    if (typeof callBack !== "function") {
+      throw new Error("a callback is required.");
+    }
+    if (this.root === null) return;
+    let queue = [this.root];
+    while (queue.length > 0) {
+      const node = queue.shift();
+      callBack(node);
+      if (node.left !== null) queue.push(node.left);
+      if (node.right !== null) queue.push(node.right);
+    }
+  }
 }
