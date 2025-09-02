@@ -97,4 +97,49 @@ class Tree {
       if (node.right !== null) queue.push(node.right);
     }
   }
+  inOrderForEach(callBack) {
+    if (typeof callBack !== "function") {
+      throw new Error("undefined is not a function.");
+    }
+    if (this.root === null) return;
+    const stack = [];
+    let current = this.root;
+    while (current !== null || stack.length > 0) {
+      while (current !== null) {
+        stack.push(current);
+        current = current.left;
+      }
+      current = stack.pop();
+      callBack(current);
+      current = current.right;
+    }
+  }
+  preOrderForEach(callBack) {
+    if (typeof callBack !== "function") {
+      throw new Error("undefined is not a function.");
+    }
+    if (this.root === null) return;
+    const stack = [this.root];
+    while (stack.length > 0) {
+      const node = stack.pop();
+      callBack(node);
+      if (node.right !== null) stack.push(node.right);
+      if (node.left !== null) stack.push(node.left);
+    }
+  }
+  postOrderForEach(callBack) {
+    if (typeof callBack !== "function") {
+      throw new Error("undefined is not a function.");
+    }
+    if (this.root === null) return;
+    const stack1 = [this.root];
+    const stack2 = [];
+    while (stack1.length > 0) {
+      const node = stack1.pop();
+      if (node.right !== null) stack1.push(node.right);
+      if (node.left !== null) stack1.push(node.left);
+      stack2.push(node);
+    }
+    while (stack2.length !== 0) callBack(stack2.pop());
+  }
 }
