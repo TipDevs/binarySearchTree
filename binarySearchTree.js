@@ -26,6 +26,21 @@ class Tree {
     root.right = this.#buildTreeRecur(arr, mid + 1, end);
     return root;
   }
+  prettyPrint() {
+    const print = (node, prefix = "", isLeft = true) => {
+      if (node === null) {
+        return;
+      }
+      if (node.right !== null) {
+        print(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+      }
+      console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+      if (node.left !== null) {
+        print(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+      }
+    };
+    print(this.root);
+  }
   insert(value) {
     this.root = this.#insert(this.root, value);
   }
