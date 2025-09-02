@@ -136,8 +136,8 @@ class Tree {
     const stack2 = [];
     while (stack1.length > 0) {
       const node = stack1.pop();
-      if (node.right !== null) stack1.push(node.right);
       if (node.left !== null) stack1.push(node.left);
+      if (node.right !== null) stack1.push(node.right);
       stack2.push(node);
     }
     while (stack2.length !== 0) callBack(stack2.pop());
