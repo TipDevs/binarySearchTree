@@ -189,4 +189,9 @@ class Tree {
     if (Math.abs(leftHeight - rightHeight) > 1) return false;
     return this.#checkBalance(node.left) && this.#checkBalance(node.right);
   }
+  rebalance() {
+    const newArray = [];
+    this.inOrderForEach((node) => newArray.push(node.data));
+    this.root = this.#buildTree(newArray);
+  }
 }
