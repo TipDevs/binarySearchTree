@@ -169,4 +169,14 @@ class Tree {
     if (node === null) return null;
     return getHeight(node);
   }
+  depth(value) {
+    function findDepth(node, value, currentDepth) {
+      if (node === null) return null;
+      if (node.data === value) return currentDepth;
+      if (value < node.data)
+        return findDepth(node.left, value, currentDepth + 1);
+      else return findDepth(node.right, value, currentDepth + 1);
+    }
+    return findDepth(this.root, value, 0);
+  }
 }
