@@ -158,16 +158,16 @@ class Tree {
     while (stack2.length !== 0) callBack(stack2.pop());
   }
   height(value) {
-    function getHeight(node) {
-      if (node === null) return -1;
-      if (node.left === null && node.right === null) return 0;
-      let leftHeight = getHeight(node.left);
-      let rightHeight = getHeight(node.right);
-      return 1 + Math.max(leftHeight, rightHeight);
-    }
     let node = this.find(value);
     if (node === null) return null;
-    return getHeight(node);
+    return this.#getHeight(node);
+  }
+  #getHeight(node) {
+    if (node === null) return -1;
+    if (node.left === null && node.right === null) return 0;
+    let leftHeight = this.#getHeight(node.left);
+    let rightHeight = this.#getHeight(node.right);
+    return 1 + Math.max(leftHeight, rightHeight);
   }
   depth(value) {
     function findDepth(node, value, currentDepth) {
