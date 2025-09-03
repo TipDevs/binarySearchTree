@@ -157,4 +157,22 @@ class Tree {
     }
     while (stack2.length !== 0) callBack(stack2.pop());
   }
+  height(value) {
+    function getHeight(node) {
+      if (node === null) return -1;
+      if (node.left === null && node.right === null) return 0;
+      let leftHeight = getHeight(node.left);
+      let rightHeight = getHeight(node.right);
+      return 1 + Math.max(leftHeight, rightHeight);
+    }
+    function findNode(root, value) {
+      if (root === null) return null;
+      if (root.data === value) return root;
+      if (value < root.data) return findNode(root.left, value);
+      else return findNode(root.right, value);
+    }
+    let node = findNode(this.root, value);
+    if (node === null) return null;
+    return getHeight(node);
+  }
 }
