@@ -179,4 +179,14 @@ class Tree {
     }
     return findDepth(this.root, value, 0);
   }
+  isBalanced() {
+    return this.#checkBalance(this.root);
+  }
+  #checkBalance(node) {
+    if (node === null) return true;
+    let leftHeight = this.#getHeight(node.left);
+    let rightHeight = this.#getHeight(node.right);
+    if (Math.abs(leftHeight - rightHeight) > 1) return false;
+    return this.#checkBalance(node.left) && this.#checkBalance(node.right);
+  }
 }
